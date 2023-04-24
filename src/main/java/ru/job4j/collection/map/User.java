@@ -24,10 +24,6 @@ public class User {
                 '}';
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, children, birthday);
-    }
 
     public static void main(String[] args) {
         Calendar birthday = Calendar.getInstance();
@@ -47,6 +43,20 @@ public class User {
         System.out.println(bucket1);
         System.out.println(hash2);
         System.out.println(bucket2);
+        System.out.println(user1.equals(user2));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return children == user.children && name.equals(user.name) && birthday.equals(user.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
     }
 }
 
