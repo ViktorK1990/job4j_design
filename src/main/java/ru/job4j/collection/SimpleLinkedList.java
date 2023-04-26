@@ -2,6 +2,8 @@ package ru.job4j.collection;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleLinkedList <E> implements LinkedList<E> {
 
@@ -11,16 +13,24 @@ public class SimpleLinkedList <E> implements LinkedList<E> {
 
     @Override
     public void add(E value) {
-    if(head == null) {
-        Node<E> newNode = new Node<>(value,null);
-        head = newNode;
-    }
-
+   Node<E> tempNode = head;
+   Node<E> newNode = new Node<>(value, tempNode);
+   head = newNode;
+   size++;
+   modCount++;
         }
 
     @Override
     public E get(int index) {
-        return null;
+        Objects.checkIndex(index, size);
+        Node<E> newElement = head;
+        E element = head.item;
+        for(int i = 0; i < index; i++) {
+            newElement = newElement.next;
+            element = newElement.item;
+        }
+
+        return element;
     }
 
     @Override
@@ -38,6 +48,9 @@ public class SimpleLinkedList <E> implements LinkedList<E> {
 
             @Override
             public E next() {
+                if(!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 E element = newElement.item;
                 newElement = newElement.next;
                 return element;
@@ -53,5 +66,17 @@ public class SimpleLinkedList <E> implements LinkedList<E> {
             this.item = item;
             this.next = next;
         }
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new SimpleLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Iterator<Integer> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+        System.out.println(list.get(1));
     }
 }
