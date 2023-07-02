@@ -5,10 +5,13 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+       String name = "Petr Arsentyev";
+       int age = 33;
+       byte sec = 1;
+       short a = 3;
+       long b = 4;
+       double c = 5;
+       char d = 'd';
+       LOG.debug("name: {}, age: {}, sec: {}, a: {}, b: {}, c: {}, d: {}", name, age, sec, a, b, c, d);
     }
 }
