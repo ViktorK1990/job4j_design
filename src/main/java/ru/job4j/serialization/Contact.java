@@ -1,10 +1,22 @@
 package ru.job4j.serialization;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 import java.nio.file.Files;
+@XmlRootElement (name = "contact")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Contact implements Serializable {
+    @XmlAttribute
     private String name;
+    @XmlAttribute
     private int age;
+    @XmlAttribute
     private int weight;
+
+    public Contact() {
+    };
 
     public Contact(String name, int age, int weight) {
         this.name = name;
